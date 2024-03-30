@@ -27,6 +27,10 @@
         return marks[a];
       }
     }
+    if (!marks.includes(".")) {
+      resetGame();
+      next = "X";
+    }
     return null;
   };
 
@@ -44,15 +48,16 @@
 </script>
 
 <main>
-  <div class="board">
-    {#each marks as mark, index (index)}
-      <button class="box" on:click={() => handleClick(index)}>
-        <span>{mark}</span>
-      </button>
-    {/each}
-  </div>
   {#if winnerMessage}
     <p class="winner">{winnerMessage}</p>
+  {:else}
+    <div class="board">
+      {#each marks as mark, index (index)}
+        <button class="box" on:click={() => handleClick(index)}>
+          <span>{mark}</span>
+        </button>
+      {/each}
+    </div>
   {/if}
 </main>
 
